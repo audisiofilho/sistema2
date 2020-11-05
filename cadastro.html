@@ -3,7 +3,10 @@
       <meta charset = "utf-8"/>
       <title>cadastro</title>
 
-      <script type="text/javascript">
+	  <script type="text/javascript">
+	    function logar(){
+			window.location.href = "login.html";
+		}
 		
 		function validar() {
 			var senha = formCont.SenhaUser.value;
@@ -45,10 +48,11 @@
 			Senha:<br><input type="password" placeholder="••••••••" maxlength="8" name="SenhaUser"><br><br>
 			Repetir Senha:<br><input type="password" placeholder="••••••••" maxlength="8" name="RepeatSenhaUser"><br><br>
 
-			<input type="submit" onclick="return validar()" value="Cadastrar">
+			<input type="submit" onclick="validar()" value="Cadastrar">
 
 			
 		</form>
+		<button onclick="logar()">Fazer login.</button>
 	</center>
     
 </body>
