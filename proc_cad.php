@@ -4,7 +4,10 @@
 
   include_once 'conexao.php';
 
+  echo "<head><title>Cadastrado</title></head>";
+
   //recebendo dados do formulário.
+
 
   if(isset($_POST)){
 
@@ -16,10 +19,13 @@
   $destino = "$dir/".$imagem["name"];
 
   if(move_uploaded_file($imagem["tmp_name"], $destino)){
-      echo "Arquivo Enviado Com Sucesso";
+    $_SESSION['msg'] = "<div class='notification is-success'><p style='color:white;'>Imagem Enviada Com Sucesso.</p></div>";
+  	header("Location: cadastro.php");
+
   }
   else{
-      echo "Erro, Arquivo não pode ser enviado";
+    $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:red;'>Erro, Imagem Não Pode ser enviada.</p></div>";
+  	header("Location: cadastro.php");
   }
 
   
@@ -38,16 +44,21 @@
   $insert_cont -> bindParam(':imagem',$destino);
 
   if ($insert_cont -> execute()) {
-  		echo "<br>Cadastro efutuado com sucesso.";
+    $_SESSION['msg'] = "<div class='notification is-success'><p style='color:white;'>Cadastro Efetuado.</p></div>";
+  	header("Location: cadastro.php");
 
   }else{
-  		echo "<br>Cadastro não efutuado.";
+    $_SESSION['msg'] = "<div class='notification is-warning'><p style='color:yellow;'>Cadastro Não Efetuado.</p></div>";
+    header("Location: cadastro.php");
+
 
   }
 
   }
   else{
-  	echo "<br>Não foi possivel acessar o BD";
+    $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:red;'>Erro Ao Acessar o BD.</p></div>";
+  	header("Location: cadastro.php");
   }
+  
 
 ?>

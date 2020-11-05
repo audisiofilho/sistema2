@@ -5,6 +5,8 @@ include_once 'conexao.php';
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
+echo "<head><title>Logado</title></head>";
+
 if(
     (isset($email)&&isset($senha))
     &&
