@@ -1,9 +1,12 @@
 <?php
 
+session_start();
+
 include_once 'conexao.php';
 
-$email = $_POST["email"];
-$senha = $_POST["senha"];
+$email = addslashes($_POST["email"]);
+$senha = addslashes($_POST["senha"]);
+$senhamd5 = md5($senha);
 
 echo "<head><title>Logado</title></head>";
 
@@ -18,7 +21,7 @@ if(
     $select_login = $con -> prepare($log_cont);
 
     $select_login->bindParam(1, $email);
-    $select_login->bindParam(2, $senha);
+    $select_login->bindParam(2, $senhamd5);
 
     $select_login->execute();
     $resultado = $select_login->fetchAll();
@@ -41,12 +44,14 @@ if(
     }
     else
     {
-        echo "Erro no acesso.";
+        $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:white;'>Erro No Acesso.</p></div>";
+  	header("Location: index.php");
     }
 }
 else
 {
-    echo "Campos não preenchidos.";
+    $_SESSION['msg'] = "<div class='notification is-warning'><p style='color:white;'>Campos Não Preenchidos.</p></div>";
+    header("Location: index.php");
 }
 
 ?>

@@ -5,19 +5,38 @@
 <html>
 <head>
       <meta charset = "utf-8"/>
-	  <title>cadastro</title>
+	  <title>Cadastro</title>
+	  <link rel="shortcut icon" href="favicon.ico">
 	  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	  <link rel="stylesheet" href="css/bulma.min.css">
       <link rel="stylesheet" type="text/css" href="css/login.css">
 
 	  <script type="text/javascript">
 	    function logar(){
-			window.location.href = "login.html";
+			window.location.href = "index.php";
 		}
 
 		function validar() {
+			var nome = cadastro.NomeUser.value;
+			var email = cadastro.EmailUser.value;
 			var senha = cadastro.SenhaUser.value;
 			var repeat = cadastro.RepeatSenhaUser.value;
+			
+			
+
+			if(nome == ""){
+				alert('Preencha o campo de Nome de Usuário.')
+				cadastro.NomeUser.focus();
+				return false;
+				console.log(validar());
+		    }
+			
+			if(email == ""){
+				alert('Preencha o campo de Email.')
+				cadastro.EmailUser.focus();
+				return false;
+			}
+			
 
 			if (senha == "" || senha.length <= 7) {
 				alert('Preencha o campo de senha com no minimo 8 caracteres.')
@@ -59,6 +78,13 @@
 				}
 				?>
 
+                <?php
+				if (isset($_SESSION['msg2'])) {
+					echo $_SESSION['msg2'];
+					unset($_SESSION['msg2']);
+				}
+				?>
+
 				<div class="box">
 					<form name="cadastro" method="POST" action="proc_cad.php" enctype="multipart/form-data">
 						<!--NOME-->
@@ -76,7 +102,7 @@
 						<!--EMAIL-->
 						<div class="field">
 							<div class="control">
-								<div style="font-size: medium;" class="title has-text-black">Email:</div><input type="text" placeholder="Ex.: Pedro@email.com" class="input is-medium" name="EmailUser"><br>
+								<div style="font-size: medium;" class="title has-text-black">Email:</div><input type="email" placeholder="Ex.: Pedro@email.com" class="input is-medium" name="EmailUser"><br>
 							</div>
 						</div>
 						<!--SENHA-->
@@ -96,7 +122,7 @@
 
 					</form>
 					<br>
-					<button class="button is-block is-link is-large is-fullwidth" onclick="return logar()">Fazer login</button>
+					<button class="button is-block is-link is-large is-fullwidth" onclick="logar()">Fazer login</button>
 
 				</div>
 

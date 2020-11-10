@@ -4,8 +4,6 @@
 
   include_once 'conexao.php';
 
-  echo "<head><title>Cadastrado</title></head>";
-
   //recebendo dados do formulário.
 
 
@@ -23,8 +21,9 @@
   	header("Location: cadastro.php");
 
   }
+  
   else{
-    $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:red;'>Erro, Imagem Não Pode ser enviada.</p></div>";
+    $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:white;'>Erro, Imagem Não Pode Ser Enviada.</p></div>";
   	header("Location: cadastro.php");
   }
 
@@ -34,21 +33,22 @@
   
 
   //Inserir no BD.
+  $senhamd5 = md5($senha);
 
   $cad_cont = "INSERT INTO usuario (nome, email, senha, imagem) VALUES (:nome, :email, :senha, :imagem)";
 
   $insert_cont = $con -> prepare ($cad_cont); 
   $insert_cont -> bindParam(':nome', $nome); 
   $insert_cont -> bindParam(':email', $email);
-  $insert_cont -> bindParam(':senha', $senha);
+  $insert_cont -> bindParam(':senha', $senhamd5);
   $insert_cont -> bindParam(':imagem',$destino);
 
   if ($insert_cont -> execute()) {
-    $_SESSION['msg'] = "<div class='notification is-success'><p style='color:white;'>Cadastro Efetuado.</p></div>";
+    $_SESSION['msg2'] = "<div class='notification is-success'><p style='color:white;'>Cadastro Efetuado.</p></div>";
   	header("Location: cadastro.php");
 
   }else{
-    $_SESSION['msg'] = "<div class='notification is-warning'><p style='color:yellow;'>Cadastro Não Efetuado.</p></div>";
+    $_SESSION['msg2'] = "<div class='notification is-warning'><p style='color:white;'>Cadastro Não Efetuado.</p></div>";
     header("Location: cadastro.php");
 
 
@@ -56,7 +56,7 @@
 
   }
   else{
-    $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:red;'>Erro Ao Acessar o BD.</p></div>";
+    $_SESSION['msg2'] = "<div class='notification is-danger'><p style='color:white;'>Erro Ao Acessar o BD.</p></div>";
   	header("Location: cadastro.php");
   }
   
