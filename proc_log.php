@@ -31,20 +31,19 @@ if(
     foreach($resultado as $item)
     {
         $logado = true;
-        $nome = $item['nome'];
-        $email = $item['email'];
-        $imagem = $item['imagem'];
+        $_SESSION['id'] = $item['id'];
+        $_SESSION['nome'] = $item['nome'];
+        $_SESSION['email'] = $item['email'];
+        $_SESSION['imagem'] = $item['imagem'];
+      
     }
 
     if($logado){
-        echo "<center>logado com sucesso.<br></center>";
-        echo "<center>Você é: ".$nome."<br></center>";
-        echo "<center>Seu email é: ".$email."<br></center>";
-        echo "<center>Sua imagem é: <img src='$imagem' height='50' width='50'> </center";
+       header('location: painel.php');
     }
     else
     {
-        $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:white;'>Erro No Acesso.</p></div>";
+        $_SESSION['msg'] = "<div class='notification is-danger'><p style='color:white;'>Você Não Possui Um Login, Cadastre-se e tente novamente.</p></div>";
   	header("Location: index.php");
     }
 }

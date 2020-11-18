@@ -1,5 +1,11 @@
 <?php
+
    session_start();
+   unset($_SESSION['id']);
+   unset($_SESSION['nome']);
+   unset($_SESSION['nome']);
+   unset($_SESSION['imagem']);
+   
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +42,7 @@
                                 <!--EMAIL-->
                                 <div class="field">
                                     <div class="control">
-                                        <div style="font-size: medium;" class="title has-text-black">Email:</div><input type="text" class="input is-medium" name="email"><br>
+                                        <div style="font-size: medium;" class="title has-text-black">Email:</div><input type="email" class="input is-medium" name="email"><br>
                                     </div>
                                 </div>
                                 <!--SENHA-->
